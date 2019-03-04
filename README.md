@@ -25,64 +25,95 @@ Data structures & Functions
 
 Basic user item:
 
+```
 type Item: record {
     key: string &optional;
 val: double &optional;
 };
+```
 
 The heap definition:
 
+```
 type Heap: record {
 heap: table[count] of Item;     # The binary heap itself
                idx: table[string] of count;    # map of key to location in binary heap
                cmp: function(a: double, b:double): double;
 };
+```
 
 Create a Heap:
 
+```
 Init: function(cmp: function(a: double, b:double): double): Heap;
+```
 This function returns an empty Heap record, initialized.  cmp is the comparison function to determine whether to swap items.  Not usually used.
  
+```
 MinHeap: function(): Heap;
+```
 This calls Init with an appropriate cmp() function that structures the Heap as a MinHeap.
 
+```
 MaxHeap: function(): Heap;
+```
 Creates a MaxHeap ala MinHeap
 
+```
 Add: function(a: Heap, var: Item): bool;
+```
 Adds an Item to Heap, returns F if var$key already exists, T upon success
 
+```
 Modify: function(a: Heap, var: Item): bool;
+```
 Modifies an Item already in Heap to var$val, returns F if var$key doesn’t exist, T upon success
 
+```
 Update:function(a: Heap, var: Item);
-Updates or adds and Item in heap.  If var$key exists, add var$item to current value,
+```
+Updates or adds an Item in heap.  If var$key exists, add var$item to current value,
 Otherwise add Item to Heap
 
+```
 Delete: function(a: Heap, var: Item): bool;
+```
 Delete Item var$key from Heap, var$val unused.  Return T is var$key was in Heap, otherwise F
 
+```
 Peek: function(a: Heap): Item;
+```
 Returns Item at root of Heap, without deleting from Heap, or empty Item if Heap is empty
 
+```
 Root: function(a: Heap): Item;
+```
 Returns Item at root of Heap, and deletes it from Heap, or empty Item if Heap is empty
 
+```
 RootAndAdd: function(a: Heap, var: Item): Item;
+```
 This function combines in an efficient way the Root() function, and the Add() function
 
+```
 IsIn: function(a: Heap, var: Item): bool;
+```
 Returns T or F depending on whether var$key is in the heap
 
+```
 Size: function(a: Heap): count;
+```
 Returns number of Items in Heap
 
+```
 Value: function(a: Heap, var: Item): Item;
+```
 Returns Item that corresponds to var$key, or empty Item if non-existant
 
 
 Usage Example
 
+```
 event bro_init()
 	{
 	# Randomize
@@ -110,6 +141,6 @@ event bro_init()
 		}
 	exit(0);
 	}
-
+```
 
 
